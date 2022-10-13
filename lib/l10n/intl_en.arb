@@ -1,0 +1,13 @@
+{
+  "app": "Demo App",
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "email_hint": "Input email",
+  "password_hint": "Input password",
+  "email_in_validate": "Email format is invalid",
+  "password_in_validate": "Minimum 6 characters",
+  "login_success": "Login success",
+  "login_failed": "Login failed",
+  "ok": "Ok"
+}
