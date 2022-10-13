@@ -9,5 +9,6 @@
   "password_in_validate": "Minimum 6 characters",
   "login_success": "Login success",
   "login_failed": "Login failed",
-  "ok": "Ok"
+  "ok": "Ok",
+  "something_went_wrong": "Something went wrong"
 }

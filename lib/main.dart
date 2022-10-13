@@ -28,10 +28,11 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+        supportedLocales: S.delegate.supportedLocales,
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
         theme: ThemeConfig.lightTheme,
-        initialRoute: RoutesName.splash,
+        initialRoute: RoutesName.login,
         onGenerateRoute: Routes.generateRoute,
       ),
     );

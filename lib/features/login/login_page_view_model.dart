@@ -1,9 +1,6 @@
-import 'package:demo_mvvm/generated/l10n.dart';
 import 'package:demo_mvvm/infrastructure/utils.dart';
 import 'package:demo_mvvm/models/login_result_model.dart';
 import 'package:demo_mvvm/services/api/repositories/auth_repository.dart';
-import 'package:demo_mvvm/widgets/app_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPageViewModel extends ChangeNotifier {
@@ -17,30 +14,16 @@ class LoginPageViewModel extends ChangeNotifier {
   bool isPasswordValidate = false;
   bool isLoading = false;
 
-  Future<void> login(BuildContext context) async {
+  Future<String> login() async {
     setLoading(true);
-    hideKeyBoard(context);
-    await _authRepository.login(email, password).then((value) {
-      if (value?.code == 200) {
-        showDialog(
-            context: context,
-            builder: (BuildContext ctx) {
-              return AppDialog(
-                title: S.current.login_success,
-              );
-            });
-      } else {
-        showDialog(
-            context: context,
-            builder: (BuildContext ctx) {
-              return AppDialog(
-                title: S.current.login_failed,
-                message: value?.errorMessage ?? '',
-              );
-            });
-      }
-    });
+    final LoginResultModel? result =
+        await _authRepository.login(email, password);
     setLoading(false);
+    if (result?.code == 200) {
+      return '';
+    } else {
+      return result?.errorMessage ?? '';
+    }
   }
 
   void onEmailChanged(String email) {

@@ -3,6 +3,7 @@ import 'package:demo_mvvm/generated/l10n.dart';
 import 'package:demo_mvvm/infrastructure/utils.dart';
 import 'package:demo_mvvm/theme/app_colors.dart';
 import 'package:demo_mvvm/theme/app_dimens.dart';
+import 'package:demo_mvvm/widgets/app_dialog.dart';
 import 'package:demo_mvvm/widgets/input_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         elevation: 0.5,
         title: Text(
-          S.current.login,
+          S.of(context).login,
           style: Theme.of(context).textTheme.headline2,
         ),
       ),
@@ -38,8 +39,9 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 SizedBox(height: AppDimens.h_16),
                 AppInputField(
-                  inputTitle: S.current.email,
-                  hint: S.current.email_hint,
+                  key: const Key('email'),
+                  inputTitle: S.of(context).email,
+                  hint: S.of(context).email_hint,
                   inputType: TextInputType.emailAddress,
                   onChanged: (email) {
                     value.onEmailChanged(email);
@@ -47,20 +49,42 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: AppDimens.h_16),
                 AppInputField(
-                  inputTitle: S.current.password,
+                  key: const Key('password'),
+                  inputTitle: S.of(context).password,
                   obscureText: true,
-                  hint: S.current.password_hint,
+                  hint: S.of(context).password_hint,
                   onChanged: (password) {
                     value.onPasswordChanged(password);
                   },
                 ),
                 SizedBox(height: AppDimens.h_48),
                 GestureDetector(
+                  key: const Key('loginButton'),
                   onTap: () {
                     if (value.isEmailValidate &&
                         value.isPasswordValidate &&
                         !value.isLoading) {
-                      value.login(context);
+                      hideKeyBoard(context);
+                      value.login().then((message) {
+                        if (message.isEmpty) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return AppDialog(
+                                  title: S.of(context).login_success,
+                                );
+                              });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return AppDialog(
+                                  title: S.of(context).login_failed,
+                                  message: message,
+                                );
+                              });
+                        }
+                      });
                     }
                   },
                   child: Container(
@@ -75,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: value.isLoading
                         ? const CupertinoActivityIndicator()
                         : Text(
-                            S.current.login,
+                            S.of(context).login,
                             style: Theme.of(context)
                                 .textTheme
                                 .button

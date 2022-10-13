@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Text(
-          S.current.app,
+          S.of(context).app,
           style: Theme.of(context).textTheme.headline1,
         ),
       ),

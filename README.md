@@ -1,16 +1,17 @@
 # demo_mvvm
 
-A new Flutter project.
+A demo MVVM Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a demo project using MVVM architecture.
 
-A few resources to get you started if this is your first Flutter project:
+#1 To run project, please get dependencies first then type in project terminal:
+flutter run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#2 This app has integration test, widget test and unit test, to run test please type:
+flutter test integration_test
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#3 Timelog:
+Create app structure: 1.5 hrs
+UI (Login page, custom widgets, config theme, dimens): 1 hr
